@@ -41,10 +41,11 @@ public class CarrinhoServiceImplTest {
         preComunidadeRepository.save(precomunidade1);
 
         Consumidor consumidor1 = new Consumidor();
-        consumidor1.setCpf("123.456.789-10");
+        consumidor1.setCpf("12345678910");
         consumidor1.setNome("Gustavo");
         consumidor1.setSobrenome("Moraes");
         consumidor1.setSenha("senha");
+        consumidor1.setEmail("gustavo@email.com");
         consumidor1.setPrecomunidade(precomunidade1);
         repositoryConsumidor.save(consumidor1);
 
@@ -57,9 +58,9 @@ public class CarrinhoServiceImplTest {
         cotacao1.setPreco(BigDecimal.valueOf(3.50));
         repositoryCotacao.save(cotacao1);
 
-        carrinhoServiceImpl.sincronizarProduto("123.456.789-10", cotacao1.getId(), 2.0);
+        carrinhoServiceImpl.sincronizarProduto(consumidor1.getId(), cotacao1.getId(), 2.0);
 
-        List<Carrinho> carrinho1 = repositoryCarrinho.findByConsumidorCpf("123.456.789-10");
+        List<Carrinho> carrinho1 = repositoryCarrinho.findByConsumidorCpf("12345678910");
 
         Assertions.assertEquals(2.0, carrinho1.get(0).getQuantidade().doubleValue());
     }

@@ -7,15 +7,13 @@ import br.com.livresbs.livres.model.PreComunidade;
 import br.com.livresbs.livres.repository.ConsumidorRepository;
 import br.com.livresbs.livres.repository.PreComunidadeRepository;
 import br.com.livresbs.livres.service.ConsumidorService;
-import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.nio.charset.StandardCharsets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,9 @@ public class ConsumidorImpl implements ConsumidorService {
 
     @Autowired
     PreComunidadeRepository pre;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     public List<ConsumidorDTO> listarConsumidor() {
@@ -62,15 +63,12 @@ public class ConsumidorImpl implements ConsumidorService {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inválido");
             }
 
-            String senha = con.getSenha();
-
-            String sha256hex = Hashing.sha256().hashString(senha, StandardCharsets.UTF_8).toString();
-
             Consumidor consumidor = Consumidor.builder()
                     .cpf(con.getCpf())
+                    .email(con.getEmail())
                     .nome(con.getNome())
                     .sobrenome(con.getSobrenome())
-                    .senha(sha256hex)
+                    .senha(passwordEncoder.encode(con.getSenha()))
                     .precomunidade(oppre.get())
                     .build();
 
@@ -98,6 +96,7 @@ public class ConsumidorImpl implements ConsumidorService {
                 Consumidor con = Consumidor.builder()
                         .cpf(consumidor.getCpf())
                         .nome(consumidor.getNome())
+                        .email(consumidor.getEmail())
                         .senha(cons.findById(consumidor.getCpf()).get().getSenha())
                         .sobrenome(consumidor.getSobrenome())
                         .precomunidade(oppre.get())
@@ -107,12 +106,11 @@ public class ConsumidorImpl implements ConsumidorService {
             }
             else{
 
-                String sha256hex = Hashing.sha256().hashString(senha, StandardCharsets.UTF_8).toString();
                 Consumidor con = Consumidor.builder()
                         .cpf(consumidor.getCpf())
                         .nome(consumidor.getNome())
                         .sobrenome(consumidor.getSobrenome())
-                        .senha(sha256hex)
+                        .senha(passwordEncoder.encode(consumidor.getSenha()))
                         .precomunidade(oppre.get())
                         .build();
 

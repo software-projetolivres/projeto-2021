@@ -73,10 +73,10 @@ public class PedidoServiceImplTest {
 
         List<MetodoPagamento> lista2 = new ArrayList<>();
 
-        Mockito.when(carrinhoRepository.findByConsumidorCpf("123.456.789-10")).thenReturn(lista);
+        Mockito.when(carrinhoRepository.findByConsumidorCpf("12345678910")).thenReturn(lista);
         Mockito.when(metodoPagamentoRepository.findAll()).thenReturn(lista2);
 
-        CheckoutDTO checkoutdto = pedidoServiceImpl.checkout("123.456.789-10");
+        CheckoutDTO checkoutdto = pedidoServiceImpl.checkout("12345678910");
 
         Assertions.assertTrue(checkoutdto.getValorTotal().equals(new BigDecimal(33.00).setScale(2)));
     }
