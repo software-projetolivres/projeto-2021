@@ -34,7 +34,6 @@ public class ConsumidorImpl implements ConsumidorService {
     public List<ConsumidorDTO> listarConsumidor() {
         List<ConsumidorDTO> listConsdto = new ArrayList<>();
         cons.findAll().forEach(consumidor -> {
-
             ConsumidorDTO builderDto = ConsumidorDTO.builder()
                     .nome(consumidor.getNome())
                     .cpf(consumidor.getCpf())
@@ -53,11 +52,11 @@ public class ConsumidorImpl implements ConsumidorService {
     }
 
     public ResponseEntity cadastraConsumidor(@RequestBody ConsumidorDTO con)  {
-        if(!cons.existsById(con.getCpf())) {
-            Optional<PreComunidade> oppre = pre.findById(con.getPrecomunidade());
-            if(!oppre.isPresent()){
-                return ResponseEntity.status(HttpStatus.OK).body("Pre Comunidade Não Encontrada!");
-            }
+        if(!cons.existsByCpf(con.getCpf()) || !cons.existsByEmail(con.getEmail())) {
+            //Optional<PreComunidade> oppre = pre.findById(con.getPrecomunidade());
+            // if(!oppre.isPresent()){
+            //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Pre Comunidade Não Encontrada!");
+            // }
 
             if(!ValidaCPF.isCPF(con.getCpf())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inválido");
@@ -69,7 +68,7 @@ public class ConsumidorImpl implements ConsumidorService {
                     .nome(con.getNome())
                     .sobrenome(con.getSobrenome())
                     .senha(passwordEncoder.encode(con.getSenha()))
-                    .precomunidade(oppre.get())
+                    //.precomunidade(oppre.get())
                     .build();
 
             cons.save(consumidor);
@@ -80,7 +79,6 @@ public class ConsumidorImpl implements ConsumidorService {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CPF já Cadastrado!");
         }
     }
-
 
     @Override
     public ResponseEntity<String> editaConsumidor(ConsumidorDTO consumidor) {

@@ -5,6 +5,7 @@ import br.com.livresbs.livres.model.Consumidor;
 import br.com.livresbs.livres.service.ConsumidorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ConsumidorController {
 
     @CrossOrigin
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<ConsumidorDTO> listarConsumidor() {
         return cons.listarConsumidor();
     }
@@ -26,7 +28,6 @@ public class ConsumidorController {
     public Consumidor listaConsumidorUnico(@PathVariable(value = "id") String id) {
         return cons.listaConsumidorUnico(id);
     }
-
 
     @CrossOrigin
     @PutMapping
@@ -40,6 +41,7 @@ public class ConsumidorController {
     
     @CrossOrigin
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void deletaConsumidor(@PathVariable(value = "id") String id) {
     	cons.deletarConsumidor(id);
     }

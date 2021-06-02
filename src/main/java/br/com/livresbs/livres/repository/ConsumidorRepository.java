@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ConsumidorRepository extends JpaRepository<Consumidor, String> {
     Consumidor findByEmail(String login);
+    Boolean existsByCpf(String cpf);
+    Boolean existsByEmail(String email);
 }

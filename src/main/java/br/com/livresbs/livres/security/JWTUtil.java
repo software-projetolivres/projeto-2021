@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import br.com.livresbs.livres.model.TipoPerfil;
+import br.com.livresbs.livres.service.UsuarioService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -50,7 +52,7 @@ public class JWTUtil implements Serializable{
         }
             return null;
     }
-    
+
     private Claims getClaims(String token) {
         try {
             return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
@@ -58,6 +60,14 @@ public class JWTUtil implements Serializable{
             catch (Exception e) {
             return null;
         }
+    }
+
+    public boolean authorized(Long id) {
+        UserDetailsImpl user = UsuarioService.authenticated();
+        if (user == null || (!user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId()))) {
+            return false;
+        }
+        return true;
     }
 
 }

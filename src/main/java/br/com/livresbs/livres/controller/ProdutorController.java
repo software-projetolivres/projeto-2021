@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,30 +27,35 @@ public class ProdutorController {
 	
 	@CrossOrigin
 	@GetMapping
-	public List<Produtor> listarTodosProdutos(){
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public List<Produtor> listarTodosProdutor(){
 		return ps.listarProdutores();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public Produtor listarUnicoProdutor(@PathVariable(value = "id") String id) {
 		return ps.listarUnicoProdutor(id);
 	}
 	
 	@CrossOrigin
 	@PostMapping
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> cadastarProdutor(@RequestBody Produtor produtor){
 		return ps.cadastraProdutor(produtor);
 	}
 	
 	@CrossOrigin
 	@PutMapping
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> atualizarProdutores(@RequestBody Produtor produtor){
 		return ps.atualizaProduto(produtor);
 	}
 	
 	@CrossOrigin
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> deletaProdutor(@PathVariable(value="id") String id){
 		return ps.deletarProduto(id);
 	}

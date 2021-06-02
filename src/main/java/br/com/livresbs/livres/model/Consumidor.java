@@ -24,7 +24,6 @@ public class Consumidor extends Usuario{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "precomunidade_id")
-    @NotNull
     @JsonBackReference
     private PreComunidade precomunidade;
 

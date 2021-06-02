@@ -6,6 +6,7 @@ import br.com.livresbs.livres.model.Produto;
 import br.com.livresbs.livres.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ProdutoController {
 
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<String> cadastraProduto(@RequestBody ProdutoDTO produto) {
     	return produtoService.cadastrar(produto);
     }
@@ -36,11 +38,13 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<String> deletaProduto(@PathVariable(value = "id") Integer id){
         return produtoService.deletarProduto(id);
     }
     
     @PutMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Produto editaProduto(@RequestBody Produto produto) {
     	return produtoService.editar(produto);
     }

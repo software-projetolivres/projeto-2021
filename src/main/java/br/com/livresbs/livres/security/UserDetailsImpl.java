@@ -3,7 +3,10 @@ package br.com.livresbs.livres.security;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.livresbs.livres.model.TipoPerfil;
 
 public class UserDetailsImpl implements UserDetails{
     private static final long serialVersionUID = 1L;
@@ -24,6 +27,10 @@ public class UserDetailsImpl implements UserDetails{
 
     public String getId() {
         return this.id;
+    }
+
+    public boolean hasRole (TipoPerfil perfil) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
     }
 
     @Override

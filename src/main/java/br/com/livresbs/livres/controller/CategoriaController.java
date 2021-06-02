@@ -4,6 +4,7 @@ import br.com.livresbs.livres.model.CategoriaProduto;
 import br.com.livresbs.livres.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,18 +26,21 @@ public class CategoriaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<String> editaCategoria(@RequestBody CategoriaProduto categoria){
         return categoriaService.editaCategoria(categoria);
     }
 
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<String> cadastraCategoria(@RequestBody CategoriaProduto categoria) {
         return categoriaService.cadastraCategoria(categoria);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletaConsumidor(@PathVariable(value = "id") Integer id) {
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<String> deletaCategoria(@PathVariable(value = "id") Integer id) {
         return categoriaService.deletarCategoria(id);
     }
 

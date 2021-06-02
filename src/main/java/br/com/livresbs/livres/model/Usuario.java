@@ -1,9 +1,20 @@
 package br.com.livresbs.livres.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,14 +24,16 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@MappedSuperclass
+@Entity
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode
+@Table(name = "tb_usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
-    
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -40,4 +53,18 @@ public abstract class Usuario {
     @NotBlank
     @JsonIgnore
     private String senha;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tb_perfil")
+    private Set<Integer> perfis = new HashSet<>();
+
+    public Set<TipoPerfil> getPerfis() {
+        return perfis.stream().map( tp -> TipoPerfil.toEnum(tp))
+                              .collect(Collectors.toSet());
+    }
+
+    public void addPerfil(TipoPerfil perfil) {
+        this.perfis.add(perfil.getCod());
+    }
+    
 }
