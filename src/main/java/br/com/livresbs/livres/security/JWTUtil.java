@@ -62,7 +62,7 @@ public class JWTUtil implements Serializable{
         }
     }
 
-    public boolean authorized(Long id) {
+    public boolean authorized(String id) {
         UserDetailsImpl user = UsuarioService.authenticated();
         if (user == null || (!user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId()))) {
             return false;

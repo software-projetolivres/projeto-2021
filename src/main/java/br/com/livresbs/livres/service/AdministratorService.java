@@ -1,7 +1,6 @@
 package br.com.livresbs.livres.service;
 
 import br.com.livresbs.livres.dto.AdministratorDTO;
-import br.com.livresbs.livres.dto.ConsumidorDTO;
 import br.com.livresbs.livres.model.Administrator;
 
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,18 @@
 package br.com.livresbs.livres.controller;
 
 import br.com.livresbs.livres.dto.ConsumidorDTO;
+import br.com.livresbs.livres.exception.AuthorizationException;
 import br.com.livresbs.livres.model.Consumidor;
 import br.com.livresbs.livres.service.ConsumidorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import javax.security.auth.message.AuthException;
 
 @RestController
 @RequestMapping(value = "consumidor")
@@ -25,8 +29,16 @@ public class ConsumidorController {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public Consumidor listaConsumidorUnico(@PathVariable(value = "id") String id) {
-        return cons.listaConsumidorUnico(id);
+    public ResponseEntity<Consumidor> listaConsumidorUnico(@PathVariable(value = "id") String id) {
+        try {
+            Consumidor _cons = cons.findById(id);
+            if (_cons != null){
+                return ResponseEntity.ok(_cons);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (AuthorizationException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @CrossOrigin
@@ -37,7 +49,7 @@ public class ConsumidorController {
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity cadastraConsumidor(@RequestBody ConsumidorDTO con) { return cons.cadastraConsumidor(con); }
+    public ResponseEntity<?> cadastraConsumidor(@RequestBody ConsumidorDTO con) { return cons.cadastraConsumidor(con); }
     
     @CrossOrigin
     @DeleteMapping("/{id}")

@@ -1,11 +1,13 @@
 package br.com.livresbs.livres.service.impl;
 
 import br.com.livresbs.livres.dto.ConsumidorDTO;
+import br.com.livresbs.livres.exception.AuthorizationException;
 import br.com.livresbs.livres.functions.ValidaCPF;
 import br.com.livresbs.livres.model.Consumidor;
 import br.com.livresbs.livres.model.PreComunidade;
 import br.com.livresbs.livres.repository.ConsumidorRepository;
 import br.com.livresbs.livres.repository.PreComunidadeRepository;
+import br.com.livresbs.livres.security.JWTUtil;
 import br.com.livresbs.livres.service.ConsumidorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.security.auth.message.AuthException;
+
 @Service
 public class ConsumidorImpl implements ConsumidorService {
     @Autowired
@@ -29,6 +33,9 @@ public class ConsumidorImpl implements ConsumidorService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
 
     public List<ConsumidorDTO> listarConsumidor() {
@@ -123,17 +130,22 @@ public class ConsumidorImpl implements ConsumidorService {
     }
 
     @Override
-	public /*ResponseEntity*/ void deletarConsumidor(String id) {
-		//if(cons.existsById(id)) {
-			//Consumidor con = cons.findById(id).get();
+	public ResponseEntity<?> deletarConsumidor(String id) {
+		if(cons.existsById(id)) {
 			cons.deleteById(id);
-			//return ResponseEntity.ok().body("Consumidor: " + con.getNome() + " deletado com sucesso");
-		//}
+			return ResponseEntity.ok().body("Consumidor deletado com sucesso");
+		}
 		
-			//return ResponseEntity.badRequest().body("Deu ruim");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado");
 		
 	}
 
-
-
+    @Override
+    public Consumidor findById(String id) throws AuthorizationException {
+        if(!jwtUtil.authorized(id)) {
+            throw new AuthorizationException("Acesso negado!");
+        }
+        Optional<Consumidor> _con = cons.findById(id);
+        return _con.orElse(null);
+    }
 }

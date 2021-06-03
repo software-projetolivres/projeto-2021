@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import br.com.livresbs.livres.repository.UsuarioRepository;
 import br.com.livresbs.livres.security.JWTAuthenticationFilter;
 import br.com.livresbs.livres.security.JWTAuthorizationFilter;
 import br.com.livresbs.livres.security.JWTUtil;
@@ -25,7 +26,8 @@ import br.com.livresbs.livres.security.JWTUtil;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private static final String[] PUBLIC_MATCHERS_POST = {
-        "/consumidor/**"
+        "/consumidor/**",
+        "/admin/**"
     };
     private static final String[] PUBLIC_MATCHERS_GET = {
         "/produto/**",
@@ -38,6 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UsuarioRepository userRepo;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable();
@@ -49,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(
         SessionCreationPolicy.STATELESS);
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil, userRepo));
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
     }
 

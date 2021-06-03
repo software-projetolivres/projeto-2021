@@ -18,15 +18,18 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.livresbs.livres.dto.CredenciaisDTO;
+import br.com.livresbs.livres.repository.UsuarioRepository;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
     private AuthenticationManager authenticationManager;
     private JWTUtil jwtUtil;
+    private UsuarioRepository userRepo;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UsuarioRepository userRepo) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.userRepo = userRepo;
     }
 
     @Override
