@@ -1,7 +1,9 @@
 package br.com.livresbs.livres.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,13 +47,15 @@ public class AdministratorServiceImpl implements AdministratorService{
 
     @Override
     public ResponseEntity<?> cadastraAdministrator(AdministratorDTO adm) {
+        Set<Integer> adminRole = new HashSet<>();
+        adminRole.add(1);
         if (!admin.existsByEmail(adm.getEmail())){
             Administrator administratorCre = Administrator.builder()
                     .email(adm.getEmail())
                     .nome(adm.getNome())
                     .sobrenome(adm.getSobrenome())
                     .senha(passwordEncoder.encode(adm.getSenha()))
-                    .perfis(adm.getPerfis())
+                    .perfis(adminRole)
                     .build();
             admin.save(administratorCre);
 

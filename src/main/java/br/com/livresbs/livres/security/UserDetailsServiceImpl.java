@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         Usuario user = repository.findByEmail(login);
 
         if (user != null){
-            return new UserDetailsImpl(user.getId(), user.getEmail(), user.getSenha());
+            return new UserDetailsImpl(user.getId(), user.getEmail(), user.getSenha(), user.getPerfis());
         }
         
         throw new UsernameNotFoundException(login);

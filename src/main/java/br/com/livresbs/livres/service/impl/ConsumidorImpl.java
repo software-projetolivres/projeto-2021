@@ -9,6 +9,8 @@ import br.com.livresbs.livres.repository.ConsumidorRepository;
 import br.com.livresbs.livres.repository.PreComunidadeRepository;
 import br.com.livresbs.livres.security.JWTUtil;
 import br.com.livresbs.livres.service.ConsumidorService;
+import net.bytebuddy.implementation.bytecode.constant.MethodConstant.CanCache;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.security.auth.message.AuthException;
 
@@ -58,25 +62,22 @@ public class ConsumidorImpl implements ConsumidorService {
         return cons.findById(id).get();
     }
 
-    public ResponseEntity cadastraConsumidor(@RequestBody ConsumidorDTO con)  {
+    public ResponseEntity<?> cadastraConsumidor(@RequestBody ConsumidorDTO con)  {
         if(!cons.existsByCpf(con.getCpf()) || !cons.existsByEmail(con.getEmail())) {
-            //Optional<PreComunidade> oppre = pre.findById(con.getPrecomunidade());
-            // if(!oppre.isPresent()){
-            //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Pre Comunidade Não Encontrada!");
-            // }
 
             if(!ValidaCPF.isCPF(con.getCpf())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inválido");
             }
 
+            Set<Integer> conRole = new HashSet<>();
+            conRole.add(2);
             Consumidor consumidor = Consumidor.builder()
                     .cpf(con.getCpf())
                     .email(con.getEmail())
                     .nome(con.getNome())
                     .sobrenome(con.getSobrenome())
                     .senha(passwordEncoder.encode(con.getSenha()))
-                    .perfis(con.getPerfis())
-                    //.precomunidade(oppre.get())
+                    .perfis(conRole)
                     .build();
 
             cons.save(consumidor);
