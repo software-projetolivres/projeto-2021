@@ -1,5 +1,6 @@
 package br.com.livresbs.livres.dto;
 
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,5 +14,6 @@ public class ConsumidorDTO{
     private String email;
     private String senha;
     private Long precomunidade;
+    private Set<Integer> perfis;
 
 }

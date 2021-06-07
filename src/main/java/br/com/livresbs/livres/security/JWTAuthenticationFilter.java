@@ -1,6 +1,7 @@
 package br.com.livresbs.livres.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -52,6 +53,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = jwtUtil.generateToken(username);
         response.addHeader("Authentication", "Bearer " + token);
         response.addHeader("access-control-expose-headers","Authorization");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print("{\"token\": \""+ token +"\"}");
+        out.flush();
+        
     }
 
     @Override

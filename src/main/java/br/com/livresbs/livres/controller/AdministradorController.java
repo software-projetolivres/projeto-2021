@@ -47,7 +47,7 @@ public class AdministradorController {
 
     @CrossOrigin
     @PostMapping
-    //@PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> cadastraAdministrator(@RequestBody AdministratorDTO administrator) { return admin.cadastraAdministrator(administrator); }
     
     @CrossOrigin

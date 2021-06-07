@@ -46,7 +46,6 @@ public class AdministratorServiceImpl implements AdministratorService{
     @Override
     public ResponseEntity<?> cadastraAdministrator(AdministratorDTO adm) {
         if (!admin.existsByEmail(adm.getEmail())){
-            System.out.println("AAAAAA" + adm.getPerfis());
             Administrator administratorCre = Administrator.builder()
                     .email(adm.getEmail())
                     .nome(adm.getNome())
@@ -54,7 +53,6 @@ public class AdministratorServiceImpl implements AdministratorService{
                     .senha(passwordEncoder.encode(adm.getSenha()))
                     .perfis(adm.getPerfis())
                     .build();
-            System.out.println("AAAAAA" + administratorCre);
             admin.save(administratorCre);
 
             return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com Sucesso!");

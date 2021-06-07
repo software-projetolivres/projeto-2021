@@ -75,6 +75,7 @@ public class ConsumidorImpl implements ConsumidorService {
                     .nome(con.getNome())
                     .sobrenome(con.getSobrenome())
                     .senha(passwordEncoder.encode(con.getSenha()))
+                    .perfis(con.getPerfis())
                     //.precomunidade(oppre.get())
                     .build();
 

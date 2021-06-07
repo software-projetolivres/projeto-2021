@@ -56,8 +56,8 @@ public abstract class Usuario {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tb_perfil")
-    @NotBlank
-    @Getter(AccessLevel.NONE)@Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private Set<Integer> perfis = new HashSet<>();
 
     public Set<TipoPerfil> getPerfis() {
@@ -65,8 +65,7 @@ public abstract class Usuario {
                               .collect(Collectors.toSet());
     }
 
-    public void setPerfil(TipoPerfil perfil) {
-        System.out.println("Não Entrouuu");
+    public void addPerfil(TipoPerfil perfil) {
         this.perfis.add(perfil.getCod());
     }
     
