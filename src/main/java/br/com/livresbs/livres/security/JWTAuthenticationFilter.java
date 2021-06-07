@@ -19,6 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.livresbs.livres.dto.CredenciaisDTO;
+import br.com.livresbs.livres.model.Usuario;
 import br.com.livresbs.livres.repository.UsuarioRepository;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
@@ -56,7 +57,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.print("{\"token\": \""+ token +"\"}");
+        Usuario user = userRepo.findByEmail(username);
+        out.print("{\"token\": \""+ token +"\"," + "\"roles\": " + user.getPerfis() + "}");
         out.flush();
         
     }
