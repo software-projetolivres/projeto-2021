@@ -23,7 +23,7 @@ public class PreComunidade {
     private Long id;
 
     @NotBlank
-    private String Nome;
+    private String nome;
 
     @OneToMany(mappedBy = "precomunidade")
     @JsonManagedReference

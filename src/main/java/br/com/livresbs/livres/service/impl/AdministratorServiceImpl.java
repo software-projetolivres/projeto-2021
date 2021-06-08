@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import br.com.livresbs.livres.dto.AdministratorDTO;
 import br.com.livresbs.livres.model.Administrator;
 import br.com.livresbs.livres.repository.AdministratorRepository;
@@ -30,9 +29,11 @@ public class AdministratorServiceImpl implements AdministratorService{
         List<AdministratorDTO> admListDto = new ArrayList<>();
         admin.findAll().forEach(admin -> {
             AdministratorDTO builderDto = AdministratorDTO.builder()
+                    .id(admin.getId())
                     .nome(admin.getNome())
                     .sobrenome(admin.getSobrenome())
                     .email(admin.getEmail())
+                    .id(admin.getId())
                     .build();
 
             admListDto.add(builderDto);
@@ -77,6 +78,7 @@ public class AdministratorServiceImpl implements AdministratorService{
             String senha = adm.getSenha();
             if(senha == "" || senha == null) {
                 Administrator adminEd = Administrator.builder()
+                        .id(adm.getId())
                         .nome(adm.getNome())
                         .email(adm.getEmail())
                         .senha(passwordEncoder.encode(adm.getSenha()))
@@ -88,6 +90,7 @@ public class AdministratorServiceImpl implements AdministratorService{
             else{
 
                 Administrator adminEd = Administrator.builder()
+                        .id(adm.getId())
                         .nome(adm.getNome())
                         .email(adm.getEmail())
                         .senha(admin.findById(adm.getId()).get().getSenha())

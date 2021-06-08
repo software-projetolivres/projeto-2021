@@ -9,7 +9,6 @@ import br.com.livresbs.livres.repository.ConsumidorRepository;
 import br.com.livresbs.livres.repository.PreComunidadeRepository;
 import br.com.livresbs.livres.security.JWTUtil;
 import br.com.livresbs.livres.service.ConsumidorService;
-import net.bytebuddy.implementation.bytecode.constant.MethodConstant.CanCache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.security.auth.message.AuthException;
 
 @Service
 public class ConsumidorImpl implements ConsumidorService {
@@ -45,15 +43,30 @@ public class ConsumidorImpl implements ConsumidorService {
     public List<ConsumidorDTO> listarConsumidor() {
         List<ConsumidorDTO> listConsdto = new ArrayList<>();
         cons.findAll().forEach(consumidor -> {
-            ConsumidorDTO builderDto = ConsumidorDTO.builder()
-                    .nome(consumidor.getNome())
-                    .cpf(consumidor.getCpf())
-                    .senha(consumidor.getSenha())
-                    .sobrenome(consumidor.getSobrenome())
-                    .precomunidade(consumidor.getPrecomunidade().getId())
-                    .build();
+            if (consumidor.getPrecomunidade() != null){
+                ConsumidorDTO builderDto = ConsumidorDTO.builder()
+                        .id(consumidor.getId())
+                        .nome(consumidor.getNome())
+                        .cpf(consumidor.getCpf())
+                        .email(consumidor.getEmail())
+                        .senha(consumidor.getSenha())
+                        .sobrenome(consumidor.getSobrenome())
+                        .precomunidade(consumidor.getPrecomunidade().getId())
+                        .build();
 
-            listConsdto.add(builderDto);
+                listConsdto.add(builderDto);
+            } else {
+                ConsumidorDTO builderDto = ConsumidorDTO.builder()
+                        .id(consumidor.getId())
+                        .nome(consumidor.getNome())
+                        .email(consumidor.getEmail())
+                        .cpf(consumidor.getCpf())
+                        .senha(consumidor.getSenha())
+                        .sobrenome(consumidor.getSobrenome())
+                        .build();
+
+                listConsdto.add(builderDto);
+            }
         });
         return listConsdto;
     }
@@ -91,22 +104,25 @@ public class ConsumidorImpl implements ConsumidorService {
 
     @Override
     public ResponseEntity<String> editaConsumidor(ConsumidorDTO consumidor) {
-        if(cons.existsById(consumidor.getCpf())) {
+        if(cons.existsByEmail(consumidor.getEmail())) {
             Optional<PreComunidade> oppre = pre.findById(consumidor.getPrecomunidade());
             if (!oppre.isPresent()) {
                 return ResponseEntity.status(HttpStatus.OK).body("Pre Comunidade Não Encontrada!");
             }
-
+            Set<Integer> conRole = new HashSet<>();
+            conRole.add(2);
             String senha = consumidor.getSenha();
             if(senha == "" || senha == null) {
 
                 Consumidor con = Consumidor.builder()
+                        .id(consumidor.getId())
                         .cpf(consumidor.getCpf())
                         .nome(consumidor.getNome())
                         .email(consumidor.getEmail())
                         .senha(cons.findById(consumidor.getCpf()).get().getSenha())
                         .sobrenome(consumidor.getSobrenome())
                         .precomunidade(oppre.get())
+                        .perfis(conRole)
                         .build();
 
                 cons.save(con);
@@ -114,11 +130,14 @@ public class ConsumidorImpl implements ConsumidorService {
             else{
 
                 Consumidor con = Consumidor.builder()
+                        .id(consumidor.getId())
                         .cpf(consumidor.getCpf())
                         .nome(consumidor.getNome())
                         .sobrenome(consumidor.getSobrenome())
+                        .email(consumidor.getEmail())
                         .senha(passwordEncoder.encode(consumidor.getSenha()))
                         .precomunidade(oppre.get())
+                        .perfis(conRole)
                         .build();
 
                 cons.save(con);
@@ -127,7 +146,7 @@ public class ConsumidorImpl implements ConsumidorService {
             return ResponseEntity.status(HttpStatus.OK).body("Editado com Sucesso!");
         }
         else{
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("CPF não Encontrado!");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Consumidor não Encontrado!");
         }
     }
 
