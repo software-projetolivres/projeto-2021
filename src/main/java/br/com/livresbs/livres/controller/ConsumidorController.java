@@ -54,4 +54,11 @@ public class ConsumidorController {
     public void deletaConsumidor(@PathVariable(value = "id") String id) {
     	cons.deletarConsumidor(id);
     }
+
+    @CrossOrigin
+    @GetMapping("/pendentes")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public List<ConsumidorDTO> consumidoresSemPrecomunidade(){
+        return cons.consumidoresSemPrecomunidade();
+    }
 }

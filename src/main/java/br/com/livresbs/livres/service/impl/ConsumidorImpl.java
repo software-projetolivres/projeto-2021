@@ -169,4 +169,24 @@ public class ConsumidorImpl implements ConsumidorService {
         Optional<Consumidor> _con = cons.findById(id);
         return _con.orElse(null);
     }
+
+    @Override
+    public List<ConsumidorDTO> consumidoresSemPrecomunidade() {
+        List<ConsumidorDTO> listConsdto = new ArrayList<>();
+        cons.findAll().forEach(consumidor -> {
+            if (consumidor.getPrecomunidade() == null){
+                ConsumidorDTO builderDto = ConsumidorDTO.builder()
+                        .id(consumidor.getId())
+                        .nome(consumidor.getNome())
+                        .cpf(consumidor.getCpf())
+                        .email(consumidor.getEmail())
+                        .senha(consumidor.getSenha())
+                        .sobrenome(consumidor.getSobrenome())
+                        .build();
+
+                listConsdto.add(builderDto);
+            } 
+        });
+        return listConsdto;
+    }
 }

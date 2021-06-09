@@ -26,15 +26,14 @@ import br.com.livresbs.livres.repository.ItemPedidoRepository;
 import br.com.livresbs.livres.repository.MetodoPagamentoRepository;
 import br.com.livresbs.livres.repository.PedidoRepository;
 import br.com.livresbs.livres.service.PedidoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

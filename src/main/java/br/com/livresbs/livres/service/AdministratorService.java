@@ -13,7 +13,7 @@ public interface AdministratorService {
 	
     List<AdministratorDTO> listarAdministrator();
     Administrator listaAdministratorUnico(@PathVariable(value = "id") String id);
-    ResponseEntity cadastraAdministrator(@RequestBody AdministratorDTO adm);
+    ResponseEntity<?> cadastraAdministrator(@RequestBody AdministratorDTO adm);
     void deletarAdministrator(@PathVariable(value = "id") String id);
     ResponseEntity<String> editaAdministrator(AdministratorDTO adm);
 }
