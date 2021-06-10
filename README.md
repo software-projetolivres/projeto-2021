@@ -1,3 +1,8 @@
+# Criação da imagem Docker  
+```
+docker build -f Dockerfile -t livres-api .
+```
+
 # API LIVRES BAIXADA SANTISTA
 
 ## OBJETIVO
