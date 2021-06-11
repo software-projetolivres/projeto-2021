@@ -43,6 +43,7 @@ public class ConsumidorImpl implements ConsumidorService {
     public List<ConsumidorDTO> listarConsumidor() {
         List<ConsumidorDTO> listConsdto = new ArrayList<>();
         cons.findAll().forEach(consumidor -> {
+            consumidor.getEnderecos();
             if (consumidor.getPrecomunidade() != null){
                 ConsumidorDTO builderDto = ConsumidorDTO.builder()
                         .id(consumidor.getId())
@@ -52,6 +53,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .senha(consumidor.getSenha())
                         .sobrenome(consumidor.getSobrenome())
                         .precomunidade(consumidor.getPrecomunidade().getId())
+                        .enderecos(consumidor.getEnderecos())
                         .build();
 
                 listConsdto.add(builderDto);
@@ -63,6 +65,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .cpf(consumidor.getCpf())
                         .senha(consumidor.getSenha())
                         .sobrenome(consumidor.getSobrenome())
+                        .enderecos(consumidor.getEnderecos())
                         .build();
 
                 listConsdto.add(builderDto);
@@ -91,6 +94,7 @@ public class ConsumidorImpl implements ConsumidorService {
                     .sobrenome(con.getSobrenome())
                     .senha(passwordEncoder.encode(con.getSenha()))
                     .perfis(conRole)
+                    .enderecos(con.getEnderecos())
                     .build();
 
             cons.save(consumidor);
@@ -122,6 +126,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .senha(cons.findById(consumidor.getCpf()).get().getSenha())
                         .sobrenome(consumidor.getSobrenome())
                         .precomunidade(oppre.get())
+                        .enderecos(consumidor.getEnderecos())
                         .perfis(conRole)
                         .build();
 
@@ -137,6 +142,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .email(consumidor.getEmail())
                         .senha(passwordEncoder.encode(consumidor.getSenha()))
                         .precomunidade(oppre.get())
+                        .enderecos(consumidor.getEnderecos())
                         .perfis(conRole)
                         .build();
 
@@ -182,6 +188,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .email(consumidor.getEmail())
                         .senha(consumidor.getSenha())
                         .sobrenome(consumidor.getSobrenome())
+                        .enderecos(consumidor.getEnderecos())
                         .build();
 
                 listConsdto.add(builderDto);

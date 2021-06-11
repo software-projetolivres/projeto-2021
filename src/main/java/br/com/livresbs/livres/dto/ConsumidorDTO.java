@@ -1,6 +1,9 @@
 package br.com.livresbs.livres.dto;
 
+import java.util.List;
 import java.util.Set;
+
+import br.com.livresbs.livres.model.EnderecoEntrega;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,5 +18,6 @@ public class ConsumidorDTO{
     private String senha;
     private Long precomunidade;
     private Set<Integer> perfis;
+    private List<EnderecoEntrega> enderecos;
 
 }

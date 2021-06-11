@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,7 @@ public class EnderecoEntrega {
     private String complemento;
 
     @ManyToMany(mappedBy = "enderecos")
+    @JsonBackReference
     private List<Consumidor> consumidores;
 
 }

@@ -27,12 +27,13 @@ public class Consumidor extends Usuario{
     @JsonBackReference
     private PreComunidade precomunidade;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "consumidor_endereco",
         joinColumns = @JoinColumn(name = "consumidor_id"),
         inverseJoinColumns = @JoinColumn(name = "endereco_id")
     )
+    @JsonBackReference
     private List<EnderecoEntrega> enderecos;
 
 }
