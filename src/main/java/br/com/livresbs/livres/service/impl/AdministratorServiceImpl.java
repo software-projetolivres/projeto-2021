@@ -33,7 +33,6 @@ public class AdministratorServiceImpl implements AdministratorService{
                     .nome(admin.getNome())
                     .sobrenome(admin.getSobrenome())
                     .email(admin.getEmail())
-                    .id(admin.getId())
                     .build();
 
             admListDto.add(builderDto);

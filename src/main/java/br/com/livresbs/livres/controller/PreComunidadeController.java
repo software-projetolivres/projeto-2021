@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.livresbs.livres.model.PreComunidade;
-import br.com.livresbs.livres.service.impl.PreComunidadeImpl;
 
 @RestController
 @RequestMapping(value = "precomunidade")

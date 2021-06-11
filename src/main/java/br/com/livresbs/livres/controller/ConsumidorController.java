@@ -51,8 +51,8 @@ public class ConsumidorController {
     @CrossOrigin
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public void deletaConsumidor(@PathVariable(value = "id") String id) {
-    	cons.deletarConsumidor(id);
+    public ResponseEntity<?> deletaConsumidor(@PathVariable(value = "id") String id) {
+    	return cons.deletarConsumidor(id);
     }
 
     @CrossOrigin
