@@ -1,6 +1,7 @@
 package br.com.livresbs.livres.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -33,7 +34,6 @@ public class Consumidor extends Usuario{
         joinColumns = @JoinColumn(name = "consumidor_id"),
         inverseJoinColumns = @JoinColumn(name = "endereco_id")
     )
-    @JsonBackReference
     private List<EnderecoEntrega> enderecos;
 
 }
