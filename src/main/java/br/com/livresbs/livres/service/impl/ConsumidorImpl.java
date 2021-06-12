@@ -123,7 +123,7 @@ public class ConsumidorImpl implements ConsumidorService {
                         .cpf(consumidor.getCpf())
                         .nome(consumidor.getNome())
                         .email(consumidor.getEmail())
-                        .senha(cons.findById(consumidor.getCpf()).get().getSenha())
+                        .senha(cons.findById(consumidor.getId()).get().getSenha())
                         .sobrenome(consumidor.getSobrenome())
                         .precomunidade(oppre.get())
                         .enderecos(consumidor.getEnderecos())
