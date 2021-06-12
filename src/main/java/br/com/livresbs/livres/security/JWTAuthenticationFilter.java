@@ -58,7 +58,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Usuario user = userRepo.findByEmail(username);
-        out.print("{\"token\": \""+ token +"\"," + "\"roles\": " + user.getPerfis() + "}");
+        out.print("{\"token\": \""+ token +"\"," + "\"roles\": \"" + user.getPerfis().stream().findAny().orElse(TipoPerfil.CLIENTE).getDescricao() + "\"}");
         out.flush();
         
     }
