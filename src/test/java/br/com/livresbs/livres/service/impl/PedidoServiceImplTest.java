@@ -1,12 +1,14 @@
 package br.com.livresbs.livres.service.impl;
 
+import br.com.livresbs.livres.dto.AlteracaoItemCarrinhoDTO;
+import br.com.livresbs.livres.dto.AvaliacaoPedidoDTO;
 import br.com.livresbs.livres.dto.CheckoutDTO;
-import br.com.livresbs.livres.model.Carrinho;
-import br.com.livresbs.livres.model.Cotacao;
-import br.com.livresbs.livres.model.MetodoPagamento;
-import br.com.livresbs.livres.model.Produto;
+import br.com.livresbs.livres.dto.OperacaoAvaliacaoPedido;
+import br.com.livresbs.livres.exception.LivresException;
+import br.com.livresbs.livres.model.*;
 import br.com.livresbs.livres.repository.CarrinhoRepository;
 import br.com.livresbs.livres.repository.MetodoPagamentoRepository;
+import br.com.livresbs.livres.repository.PedidoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,65 +21,83 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @ExtendWith(MockitoExtension.class)
 public class PedidoServiceImplTest {
 
-    // @Mock
-    // private CarrinhoRepository carrinhoRepository;
+     @Mock
+     private CarrinhoRepository carrinhoRepository;
 
-    // @Mock
-    // private MetodoPagamentoRepository metodoPagamentoRepository;
+     @Mock
+     private MetodoPagamentoRepository metodoPagamentoRepository;
 
-    // @InjectMocks
-    // private PedidoServiceImpl pedidoServiceImpl;
+     @Mock
+     private PedidoRepository pedidoRepository;
 
-    // @Test
-    // void checkout() {
-    //     Produto produto1 = new Produto();
-    //     produto1.setNome("Batata");
+     @InjectMocks
+     private PedidoServiceImpl pedidoServiceImpl;
 
-    //     Cotacao cotacao1 = new Cotacao();
-    //     cotacao1.setProduto(produto1);
-    //     cotacao1.setPreco(BigDecimal.valueOf(3.50));
+     @Test
+     void checkout() {
+         Produto produto1 = new Produto();
+         produto1.setNome("Batata");
 
-    //     Carrinho carrinho1 = new Carrinho();
-    //     carrinho1.setQuantidade(3.0);
-    //     carrinho1.setCotacao(cotacao1);
+         Cotacao cotacao1 = new Cotacao();
+         cotacao1.setProduto(produto1);
+         cotacao1.setPreco(BigDecimal.valueOf(3.50));
 
-    //     Produto produto2 = new Produto();
-    //     produto2.setNome("Banana");
+         Carrinho carrinho1 = new Carrinho();
+         carrinho1.setQuantidade(3.0);
+         carrinho1.setCotacao(cotacao1);
 
-    //     Cotacao cotacao2 = new Cotacao();
-    //     cotacao2.setProduto(produto2);
-    //     cotacao2.setPreco(BigDecimal.valueOf(2.00));
+         Produto produto2 = new Produto();
+         produto2.setNome("Banana");
 
-    //     Carrinho carrinho2 = new Carrinho();
-    //     carrinho2.setQuantidade(5.0);
-    //     carrinho2.setCotacao(cotacao2);
+         Cotacao cotacao2 = new Cotacao();
+         cotacao2.setProduto(produto2);
+         cotacao2.setPreco(BigDecimal.valueOf(2.00));
 
-    //     Produto produto3 = new Produto();
-    //     produto3.setNome("Goiaba");
+         Carrinho carrinho2 = new Carrinho();
+         carrinho2.setQuantidade(5.0);
+         carrinho2.setCotacao(cotacao2);
 
-    //     Cotacao cotacao3 = new Cotacao();
-    //     cotacao3.setProduto(produto3);
-    //     cotacao3.setPreco(BigDecimal.valueOf(6.25));
+         Produto produto3 = new Produto();
+         produto3.setNome("Goiaba");
 
-    //     Carrinho carrinho3 = new Carrinho();
-    //     carrinho3.setQuantidade(2.0);
-    //     carrinho3.setCotacao(cotacao3);
+         Cotacao cotacao3 = new Cotacao();
+         cotacao3.setProduto(produto3);
+         cotacao3.setPreco(BigDecimal.valueOf(6.25));
 
-    //     List<Carrinho> lista = new ArrayList<>();
-    //     lista.add(carrinho1);
-    //     lista.add(carrinho2);
-    //     lista.add(carrinho3);
+         Carrinho carrinho3 = new Carrinho();
+         carrinho3.setQuantidade(2.0);
+         carrinho3.setCotacao(cotacao3);
 
-    //     List<MetodoPagamento> lista2 = new ArrayList<>();
+         List<Carrinho> lista = new ArrayList<>();
+         lista.add(carrinho1);
+         lista.add(carrinho2);
+         lista.add(carrinho3);
 
-    //     Mockito.when(carrinhoRepository.findByConsumidorCpf("31522933808")).thenReturn(lista);
-    //     Mockito.when(metodoPagamentoRepository.findAll()).thenReturn(lista2);
+         List<MetodoPagamento> lista2 = new ArrayList<>();
 
-    //     CheckoutDTO checkoutdto = pedidoServiceImpl.checkout("31522933808");
+         Mockito.when(carrinhoRepository.findByConsumidorCpf("31522933808")).thenReturn(lista);
+         Mockito.when(metodoPagamentoRepository.findAll()).thenReturn(lista2);
 
-    //     Assertions.assertTrue(checkoutdto.getValorTotal().equals(new BigDecimal(33.00).setScale(2)));
-    //}
+         CheckoutDTO checkoutdto = pedidoServiceImpl.checkout("31522933808");
+
+         Assertions.assertTrue(checkoutdto.getValorTotal().equals(new BigDecimal(33.00).setScale(2)));
+    }
+
+    @Test
+    void avaliarPedido__nao_achado() {
+        //Given
+        Long idPedido = 1L;
+        AvaliacaoPedidoDTO avaliacao = new AvaliacaoPedidoDTO();
+
+        //When
+
+        //Then
+        Assertions.assertThrows(LivresException.class, () -> pedidoServiceImpl.avaliarPedido(idPedido, avaliacao));
+    }
+
 }

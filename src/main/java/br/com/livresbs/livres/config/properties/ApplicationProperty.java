@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 public class ApplicationProperty {
 
-    @Value("${quantidade.itens.pagina}")
-    private Integer quantidadeIntesPagina;
+    /*@Value("${quantidade.itens.pagina}")*/
+    private Integer quantidadeIntesPagina = 10;
 
 }

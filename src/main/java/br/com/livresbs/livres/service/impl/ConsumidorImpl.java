@@ -78,32 +78,36 @@ public class ConsumidorImpl implements ConsumidorService {
         return cons.findById(id).get();
     }
 
-    public ResponseEntity<?> cadastraConsumidor(@RequestBody ConsumidorDTO con)  {
-        if(!cons.existsByCpf(con.getCpf()) || !cons.existsByEmail(con.getEmail())) {
+    public ResponseEntity<String> cadastraConsumidor(@RequestBody ConsumidorDTO con)  {
 
-            if(!ValidaCPF.isCPF(con.getCpf())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inválido");
-            }
-
-            Set<Integer> conRole = new HashSet<>();
-            conRole.add(2);
-            Consumidor consumidor = Consumidor.builder()
-                    .cpf(con.getCpf())
-                    .email(con.getEmail())
-                    .nome(con.getNome())
-                    .sobrenome(con.getSobrenome())
-                    .senha(passwordEncoder.encode(con.getSenha()))
-                    .perfis(conRole)
-                    .enderecos(con.getEnderecos())
-                    .build();
-
-            cons.save(consumidor);
-
-            return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com Sucesso!");
+        if(!ValidaCPF.isCPF(con.getCpf())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF inválido");
         }
-        else{
+
+        if(cons.existsByCpf(con.getCpf())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CPF já Cadastrado!");
         }
+
+        if(cons.existsByEmail(con.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email já Cadastrado!");
+        }
+
+
+        Set<Integer> conRole = new HashSet<>();
+        conRole.add(2);
+        Consumidor consumidor = Consumidor.builder()
+                .cpf(con.getCpf())
+                .email(con.getEmail())
+                .nome(con.getNome())
+                .sobrenome(con.getSobrenome())
+                .senha(passwordEncoder.encode(con.getSenha()))
+                .perfis(conRole)
+                .enderecos(con.getEnderecos())
+                .build();
+
+        cons.save(consumidor);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com Sucesso!");
     }
 
     @Override
@@ -157,7 +161,7 @@ public class ConsumidorImpl implements ConsumidorService {
     }
 
     @Override
-	public ResponseEntity<?> deletarConsumidor(String id) {
+	public ResponseEntity<String> deletarConsumidor(String id) {
 		if(cons.existsById(id)) {
 			cons.deleteById(id);
 			return ResponseEntity.ok().body("Consumidor deletado com sucesso");

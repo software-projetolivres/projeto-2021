@@ -1,28 +1,25 @@
 package br.com.livresbs.livres.security;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.function.Function;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import br.com.livresbs.livres.model.TipoPerfil;
 import br.com.livresbs.livres.service.UsuarioService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+import java.util.Date;
 
 @Component
 public class JWTUtil implements Serializable{
     private static final Long serialVersionUID = 1L;
 
-    @Value("${jwt.secret}")
-    private String secret;
+    /*@Value("${jwt.secret}")*/
+    private String secret = "dfhdsf2483@@@#12dk";
 
-    @Value("${jwt.expiration}")
-    private Long expiration; 
+    /*@Value("${jwt.expiration}")*/
+    private Long expiration = 600000L;
 
     public String generateToken(String login) {
         return Jwts.builder()

@@ -9,13 +9,13 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 public class MessageProperty {
 
-    @Value("${parametro.nulo}")
-    private String menssageParametroNulo;
+    /*@Value("${parametro.nulo}")*/
+    private String menssageParametroNulo = "menssageParametroNulo";
 
-    @Value("${header.nulo}")
-    private String menssagemHeaderNulo;
+    /*@Value("${header.nulo}")*/
+    private String menssagemHeaderNulo = "menssagemHeaderNulo";
 
-    @Value("${carrinho.vazio}")
-    private String menssagemCarrinhoVazio;
+    /*@Value("${carrinho.vazio}")*/
+    private String menssagemCarrinhoVazio = "menssagemCarrinhoVazio";
 
 }

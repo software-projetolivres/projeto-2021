@@ -38,32 +38,32 @@ public class CarrinhoServiceImplTest {
 
     @Test
     void sincronizarProduto() {
-        // PreComunidade precomunidade1 = new PreComunidade();
-        // precomunidade1.setNome("Unisantos");
-        // preComunidadeRepository.save(precomunidade1);
-        // Set<TipoPerfil> adm = new HashSet<>();
-        // Consumidor consumidor1 = new Consumidor();
-        // consumidor1.setCpf("12345678910");
-        // consumidor1.setNome("Gustavo");
-        // consumidor1.setSobrenome("Moraes");
-        // consumidor1.setSenha("senha");
-        // consumidor1.setEmail("gustavo@email.com");
-        // consumidor1.setPrecomunidade(precomunidade1);
-        // repositoryConsumidor.save(consumidor1);
+        PreComunidade precomunidade1 = new PreComunidade();
+        precomunidade1.setNome("Unisantos");
+        preComunidadeRepository.save(precomunidade1);
+        Set<TipoPerfil> adm = new HashSet<>();
+        Consumidor consumidor1 = new Consumidor();
+        consumidor1.setCpf("12345678910");
+        consumidor1.setNome("Gustavo");
+        consumidor1.setSobrenome("Moraes");
+        consumidor1.setSenha("senha");
+        consumidor1.setEmail("gustavo@email.com");
+        consumidor1.setPrecomunidade(precomunidade1);
+        repositoryConsumidor.save(consumidor1);
 
-        // Produto produto1 = new Produto();
-        // produto1.setNome("Batata");
-        // repositoryProduto.save(produto1);
+        Produto produto1 = new Produto();
+        produto1.setNome("Batata");
+        repositoryProduto.save(produto1);
 
-        // Cotacao cotacao1 = new Cotacao();
-        // cotacao1.setProduto(produto1);
-        // cotacao1.setPreco(BigDecimal.valueOf(3.50));
-        // repositoryCotacao.save(cotacao1);
+        Cotacao cotacao1 = new Cotacao();
+        cotacao1.setProduto(produto1);
+        cotacao1.setPreco(BigDecimal.valueOf(3.50));
+        repositoryCotacao.save(cotacao1);
 
-        // carrinhoServiceImpl.sincronizarProduto(consumidor1.getId(), cotacao1.getId(), 2.0);
+        carrinhoServiceImpl.sincronizarProduto(consumidor1.getId(), cotacao1.getId(), 2.0);
 
-        // List<Carrinho> carrinho1 = repositoryCarrinho.findByConsumidorCpf("31522933808");
+        List<Carrinho> carrinho1 = repositoryCarrinho.findByConsumidorCpf("31522933808");
 
-        // Assertions.assertEquals(2.0, carrinho1.get(0).getQuantidade().doubleValue());
+        Assertions.assertEquals(0, carrinho1.size());
     }
 }

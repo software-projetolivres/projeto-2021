@@ -18,11 +18,15 @@ import br.com.livresbs.livres.service.AdministratorService;
 @Service
 public class AdministratorServiceImpl implements AdministratorService{
 
-    @Autowired
-    AdministratorRepository admin;
+    private AdministratorRepository admin;
+
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public AdministratorServiceImpl(AdministratorRepository admin, BCryptPasswordEncoder passwordEncoder) {
+        this.admin = admin;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public List<AdministratorDTO> listarAdministrator() {
