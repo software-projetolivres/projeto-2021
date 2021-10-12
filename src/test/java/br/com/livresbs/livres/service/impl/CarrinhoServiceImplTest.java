@@ -4,6 +4,11 @@ import br.com.livresbs.livres.model.*;
 import br.com.livresbs.livres.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -11,59 +16,120 @@ import org.springframework.test.context.ActiveProfiles;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@ActiveProfiles("test")
+
+@ExtendWith(MockitoExtension.class)
 public class CarrinhoServiceImplTest {
 
-    @Autowired
+    @Mock
     private ConsumidorRepository repositoryConsumidor;
 
-    @Autowired
+    @Mock
     private CotacaoRepository repositoryCotacao;
 
-    @Autowired
+    @Mock
     private CarrinhoRepository repositoryCarrinho;
 
-    @Autowired
+    @Mock
     private ProdutoRepository repositoryProduto;
 
-    @Autowired
-    private CarrinhoServiceImpl carrinhoServiceImpl;
-
-    @Autowired
+    @Mock
     private PreComunidadeRepository preComunidadeRepository;
 
+    @InjectMocks
+    private CarrinhoServiceImpl carrinhoServiceImpl;
+
     @Test
-    void sincronizarProduto() {
-        PreComunidade precomunidade1 = new PreComunidade();
-        precomunidade1.setNome("Unisantos");
-        preComunidadeRepository.save(precomunidade1);
-        Set<TipoPerfil> adm = new HashSet<>();
-        Consumidor consumidor1 = new Consumidor();
-        consumidor1.setCpf("12345678910");
-        consumidor1.setNome("Gustavo");
-        consumidor1.setSobrenome("Moraes");
-        consumidor1.setSenha("senha");
-        consumidor1.setEmail("gustavo@email.com");
-        consumidor1.setPrecomunidade(precomunidade1);
-        repositoryConsumidor.save(consumidor1);
+    void sincronizarProduto__consumidor_nao_existe() {
+        //Given
+        String cpf = "74642112006";
+        Long cotacaoId = 1L;
+        Double quantidade = 4.0;
 
-        Produto produto1 = new Produto();
-        produto1.setNome("Batata");
-        repositoryProduto.save(produto1);
+        //When
+        when(repositoryCarrinho.findByConsumidorCpfAndCotacaoId(cpf, cotacaoId)).thenReturn(Optional.empty());
 
-        Cotacao cotacao1 = new Cotacao();
-        cotacao1.setProduto(produto1);
-        cotacao1.setPreco(BigDecimal.valueOf(3.50));
-        repositoryCotacao.save(cotacao1);
+        //Then
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {carrinhoServiceImpl.sincronizarProduto(cpf, cotacaoId, quantidade);});
+        assertEquals("Consumidor não existe", exception.getMessage());
+    }
 
-        carrinhoServiceImpl.sincronizarProduto(consumidor1.getId(), cotacao1.getId(), 2.0);
+    @Test
+    void sincronizarProduto__estoque_nao_existe() {
+        //Given
+        String cpf = "74642112006";
+        Long cotacaoId = 1L;
+        Double quantidade = 4.0;
 
-        List<Carrinho> carrinho1 = repositoryCarrinho.findByConsumidorCpf("31522933808");
+        //When
+        when(repositoryCarrinho.findByConsumidorCpfAndCotacaoId(cpf, cotacaoId)).thenReturn(Optional.empty());
+        when(repositoryConsumidor.findById(cpf)).thenReturn(Optional.of(new Consumidor()));
 
-        Assertions.assertEquals(0, carrinho1.size());
+        //Then
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {carrinhoServiceImpl.sincronizarProduto(cpf, cotacaoId, quantidade);});
+        assertEquals("Estoque não existe", exception.getMessage());
+    }
+
+    @Test
+    void sincronizarProduto__deleta_produto_carromjp() {
+        //Given
+        String cpf = "74642112006";
+        Long cotacaoId = 1L;
+        Double quantidade = 0.0;
+
+        //When
+        Carrinho carrinho = new Carrinho();
+        carrinho.setQuantidade(quantidade);
+
+        when(repositoryCarrinho.findByConsumidorCpfAndCotacaoId(cpf, cotacaoId)).thenReturn(Optional.of(carrinho));
+        when(repositoryCotacao.findById(cotacaoId)).thenReturn(Optional.of(new Cotacao()));
+
+        //Then
+        carrinhoServiceImpl.sincronizarProduto(cpf, cotacaoId, quantidade);
+
+        verify(repositoryCarrinho, times(1)).delete(any(Carrinho.class));
+    }
+
+    @Test
+    void sincronizarProduto__acrescenta_produto_carrinho() {
+        //Given
+        String cpf = "74642112006";
+        Long cotacaoId = 1L;
+        Double quantidade = 4.0;
+
+        //When
+        Carrinho carrinho = new Carrinho();
+        carrinho.setQuantidade(quantidade);
+
+        when(repositoryCarrinho.findByConsumidorCpfAndCotacaoId(cpf, cotacaoId)).thenReturn(Optional.of(carrinho));
+        when(repositoryCotacao.findById(cotacaoId)).thenReturn(Optional.of(new Cotacao()));
+
+        //Then
+        carrinhoServiceImpl.sincronizarProduto(cpf, cotacaoId, quantidade);
+
+        verify(repositoryCarrinho, times(1)).save(any(Carrinho.class));
+    }
+
+    @Test
+    void sincronizarProduto__adiciona_primeiro_produto_carrinho() {
+        //Given
+        String cpf = "74642112006";
+        Long cotacaoId = 1L;
+        Double quantidade = 4.0;
+
+        //When
+        when(repositoryCarrinho.findByConsumidorCpfAndCotacaoId(cpf, cotacaoId)).thenReturn(Optional.empty());
+        when(repositoryConsumidor.findById(cpf)).thenReturn(Optional.of(new Consumidor()));
+        when(repositoryCotacao.findById(cotacaoId)).thenReturn(Optional.of(new Cotacao()));
+
+        //Then
+        carrinhoServiceImpl.sincronizarProduto(cpf, cotacaoId, quantidade);
+
+        verify(repositoryCarrinho, times(1)).save(any(Carrinho.class));
     }
 }

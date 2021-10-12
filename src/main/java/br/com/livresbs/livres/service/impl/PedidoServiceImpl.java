@@ -182,7 +182,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public void avaliarPedido(Long idPedido, AvaliacaoPedidoDTO avaliacao) {
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new LivresException("pedido não achado"));
+                .orElseThrow(() -> new LivresException("Pedido não achado"));
 
         if (avaliacao.getOperacao().equals(OperacaoAvaliacaoPedido.CANCELAR_PEDIDO)) {
             pedido.setStatus(StatusPedido.CANCELADO);
@@ -194,7 +194,7 @@ public class PedidoServiceImpl implements PedidoService {
             if (nonNull(avaliacao.getAlteracoes()))
                 avaliacao.getAlteracoes().forEach((AlteracaoItemCarrinhoDTO alteracao) -> {
                     ItemPedido item = itemPedidoRepository.findById(alteracao.getId())
-                            .orElseThrow(() -> new LivresException("item do pedido, não achado"));
+                            .orElseThrow(() -> new LivresException("Item do pedido não achado"));
                     item.setQuantidade(alteracao.getQuantidade());
                     itemPedidoRepository.save(item);
                 });

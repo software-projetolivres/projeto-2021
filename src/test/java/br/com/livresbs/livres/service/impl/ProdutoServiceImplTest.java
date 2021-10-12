@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -45,14 +46,32 @@ class ProdutoServiceImplTest {
 
 
         //When
-        Mockito.when(categoriaRepo.findById(produtoDTO.getCategoria())).thenReturn(categoria);
+        when(categoriaRepo.findById(produtoDTO.getCategoria())).thenReturn(categoria);
 
         //Then
         ResponseEntity<String> resposta = produtoService.cadastrar(produtoDTO);
 
-        Mockito.verify(produtoRepo, Mockito.times(1)).save(Mockito.any());
+        verify(produtoRepo, times(1)).save(any());
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         assertEquals("Cadastrado com Sucesso!", resposta.getBody());
+    }
+
+    @Test
+    void cadastrar__categoria_nao_encontrada() {
+        //Given
+        ProdutoDTO produtoDTO = ProdutoDTO.builder().id(1).categoria(1).nome("Produto teste").build();
+        CategoriaProduto categoriaProduto = new CategoriaProduto();
+        categoriaProduto.setCategoria("Categoria");
+        categoriaProduto.setId(1);
+
+        //When
+        when(categoriaRepo.findById(produtoDTO.getCategoria())).thenReturn(Optional.empty());
+
+        //Then
+        ResponseEntity<String> resposta = produtoService.cadastrar(produtoDTO);
+
+        assertEquals(HttpStatus.CONFLICT, resposta.getStatusCode());
+        assertEquals("Categoria Não Cadastrada!", resposta.getBody());
     }
 
     @Test
@@ -65,6 +84,23 @@ class ProdutoServiceImplTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
         assertEquals("Categoria não Encontrada!", resposta.getBody());
-        Mockito.verify(produtoRepo, Mockito.times(1)).existsById(id);
+        verify(produtoRepo, times(1)).existsById(id);
+    }
+
+    @Test
+    void deletarProduto__com_sucesso() {
+        //Given
+        Integer id = 1;
+
+        //When
+        when(produtoRepo.existsById(id)).thenReturn(true);
+
+        //Then
+        ResponseEntity<String> resposta = produtoService.deletarProduto(id);
+
+        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+        assertEquals("Deletado com Sucesso!", resposta.getBody());
+        verify(produtoRepo, times(1)).existsById(id);
+        verify(produtoRepo, times(1)).deleteById(id);
     }
 }

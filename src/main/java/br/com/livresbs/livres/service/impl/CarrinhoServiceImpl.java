@@ -58,12 +58,14 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
             if(!consumidorOptional.isPresent()){
                 //TODO Lançar erro quando consumidor não existir
+                throw new RuntimeException("Consumidor não existe");
             }
 
             Optional<Cotacao> cotacaoOptional = cotacaoRepository.findById(cotacaoId);
 
             if(!cotacaoOptional.isPresent()){
                 //TODO Lançar erro quando estoque não existir
+                throw new RuntimeException("Estoque não existe");
             }
 
             if(quantidade > 0) {

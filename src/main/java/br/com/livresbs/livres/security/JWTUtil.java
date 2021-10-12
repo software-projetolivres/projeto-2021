@@ -15,10 +15,10 @@ import java.util.Date;
 public class JWTUtil implements Serializable{
     private static final Long serialVersionUID = 1L;
 
-    /*@Value("${jwt.secret}")*/
+    @Value("${jwt.secret}")
     private String secret = "dfhdsf2483@@@#12dk";
 
-    /*@Value("${jwt.expiration}")*/
+    @Value("${jwt.expiration}")
     private Long expiration = 600000L;
 
     public String generateToken(String login) {

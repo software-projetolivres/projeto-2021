@@ -74,18 +74,57 @@ class ConsumidorImplTest {
                 .email("teste@email.com.br")
                 .build();
 
-        PreComunidade precomunidade = new PreComunidade();
-        precomunidade.setNome("Nome precomunidade");
-
         //When
         Mockito.when(cons.existsByEmail(consumidorDTO.getEmail())).thenReturn(true);
-        Mockito.when(pre.findById(consumidorDTO.getPrecomunidade())).thenReturn(Optional.of(precomunidade));
 
         //Then
         ResponseEntity<String> resposta = consumidor.cadastraConsumidor(consumidorDTO);
 
         assertEquals("Email já Cadastrado!", resposta.getBody());
-        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+        assertEquals(HttpStatus.CONFLICT, resposta.getStatusCode());
+    }
+
+    @Test
+    void cadastraConsumidor__cpf_ja_cadastrado() {
+        //Given
+        ConsumidorDTO consumidorDTO = ConsumidorDTO
+                .builder()
+                .id("1")
+                .cpf("57693173021")
+                .nome("nome teste")
+                .sobrenome("sobrenome teste")
+                .senha("senhateste")
+                .email("teste@email.com.br")
+                .build();
+
+        //When
+        Mockito.when(cons.existsByCpf(consumidorDTO.getCpf())).thenReturn(true);
+
+        //Then
+        ResponseEntity<String> resposta = consumidor.cadastraConsumidor(consumidorDTO);
+
+        assertEquals("CPF já Cadastrado!", resposta.getBody());
+        assertEquals(HttpStatus.CONFLICT, resposta.getStatusCode());
+    }
+
+    @Test
+    void cadastraConsumidor__cpf_invalido() {
+        //Given
+        ConsumidorDTO consumidorDTO = ConsumidorDTO
+                .builder()
+                .id("1")
+                .cpf("576931sasa73021")
+                .nome("nome teste")
+                .sobrenome("sobrenome teste")
+                .senha("senhateste")
+                .email("teste@email.com.br")
+                .build();
+
+        //Then
+        ResponseEntity<String> resposta = consumidor.cadastraConsumidor(consumidorDTO);
+
+        assertEquals("CPF inválido", resposta.getBody());
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
     }
 
     @Test
@@ -116,6 +155,56 @@ class ConsumidorImplTest {
     }
 
     @Test
+    void editaConsumidor__pre_comunidade_nao_encontrada() {
+        //Given
+        ConsumidorDTO consumidorDTO = ConsumidorDTO
+                .builder()
+                .id("1")
+                .cpf("57693173021")
+                .nome("nome teste")
+                .sobrenome("sobrenome teste")
+                .senha("senhateste")
+                .email("teste@email.com.br")
+                .build();
+
+        PreComunidade precomunidade = new PreComunidade();
+        precomunidade.setNome("Nome precomunidade");
+
+        //When
+        Mockito.when(cons.existsByEmail(consumidorDTO.getEmail())).thenReturn(true);
+        Mockito.when(pre.findById(consumidorDTO.getPrecomunidade())).thenReturn(Optional.empty());
+
+        //Then
+        ResponseEntity<String> resposta = consumidor.editaConsumidor(consumidorDTO);
+
+        assertEquals("Pre Comunidade Não Encontrada!", resposta.getBody());
+        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    }
+
+    @Test
+    void editaConsumidor__consumidor_nao_encontrada() {
+        //Given
+        ConsumidorDTO consumidorDTO = ConsumidorDTO
+                .builder()
+                .id("1")
+                .cpf("57693173021")
+                .nome("nome teste")
+                .sobrenome("sobrenome teste")
+                .senha("senhateste")
+                .email("teste@email.com.br")
+                .build();
+
+        //When
+        Mockito.when(cons.existsByEmail(consumidorDTO.getEmail())).thenReturn(false);
+
+        //Then
+        ResponseEntity<String> resposta = consumidor.editaConsumidor(consumidorDTO);
+
+        assertEquals("Consumidor não Encontrado!", resposta.getBody());
+        assertEquals(HttpStatus.CONFLICT, resposta.getStatusCode());
+    }
+
+    @Test
     void deletarConsumidor__com_sucesso() {
         //Given
         String id = "1";
@@ -128,6 +217,21 @@ class ConsumidorImplTest {
 
         assertEquals("Consumidor deletado com sucesso", resposta.getBody());
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    }
+
+    @Test
+    void deletarConsumidor__cliente_nao_encontrado() {
+        //Given
+        String id = "1";
+
+        //When
+        Mockito.when(cons.existsById(id)).thenReturn(false);
+
+        //Then
+        ResponseEntity<String> resposta = consumidor.deletarConsumidor(id);
+
+        assertEquals("Cliente não encontrado", resposta.getBody());
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
     }
 
     @Test
@@ -145,5 +249,21 @@ class ConsumidorImplTest {
         Consumidor resposta = consumidor.findById(id);
 
         Assert.assertEquals(resposta.getNome(), entrada.getNome());
+    }
+
+    @Test
+    void findById___acesso_negado() {
+        //Given
+        String id = "1";
+        Consumidor entrada = new Consumidor();
+        entrada.setNome("Consumidor nome");
+
+        //When
+        Mockito.when(jwtUtil.authorized(id)).thenReturn(false);
+
+        //Then
+        AuthorizationException exception = assertThrows(AuthorizationException.class, () -> {consumidor.findById(id);});
+
+        Assert.assertEquals("Acesso negado!", exception.getMessage());
     }
 }

@@ -43,33 +43,20 @@ public class ConsumidorImpl implements ConsumidorService {
     public List<ConsumidorDTO> listarConsumidor() {
         List<ConsumidorDTO> listConsdto = new ArrayList<>();
         cons.findAll().forEach(consumidor -> {
-            consumidor.getEnderecos();
-            if (consumidor.getPrecomunidade() != null){
-                ConsumidorDTO builderDto = ConsumidorDTO.builder()
-                        .id(consumidor.getId())
-                        .nome(consumidor.getNome())
-                        .cpf(consumidor.getCpf())
-                        .email(consumidor.getEmail())
-                        .senha(consumidor.getSenha())
-                        .sobrenome(consumidor.getSobrenome())
-                        .precomunidade(consumidor.getPrecomunidade().getId())
-                        .enderecos(consumidor.getEnderecos())
-                        .build();
+            ConsumidorDTO.ConsumidorDTOBuilder builderDto = ConsumidorDTO.builder()
+                    .id(consumidor.getId())
+                    .nome(consumidor.getNome())
+                    .email(consumidor.getEmail())
+                    .cpf(consumidor.getCpf())
+                    .senha(consumidor.getSenha())
+                    .sobrenome(consumidor.getSobrenome())
+                    .enderecos(consumidor.getEnderecos());
 
-                listConsdto.add(builderDto);
-            } else {
-                ConsumidorDTO builderDto = ConsumidorDTO.builder()
-                        .id(consumidor.getId())
-                        .nome(consumidor.getNome())
-                        .email(consumidor.getEmail())
-                        .cpf(consumidor.getCpf())
-                        .senha(consumidor.getSenha())
-                        .sobrenome(consumidor.getSobrenome())
-                        .enderecos(consumidor.getEnderecos())
-                        .build();
-
-                listConsdto.add(builderDto);
+            if(consumidor.getPrecomunidade() != null) {
+                builderDto.precomunidade(consumidor.getPrecomunidade().getId());
             }
+
+            listConsdto.add(builderDto.build());
         });
         return listConsdto;
     }

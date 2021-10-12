@@ -1,14 +1,14 @@
 package br.com.livresbs.livres.service.impl;
 
+import br.com.livresbs.livres.config.properties.MessageProperty;
 import br.com.livresbs.livres.dto.AlteracaoItemCarrinhoDTO;
 import br.com.livresbs.livres.dto.AvaliacaoPedidoDTO;
 import br.com.livresbs.livres.dto.CheckoutDTO;
 import br.com.livresbs.livres.dto.OperacaoAvaliacaoPedido;
+import br.com.livresbs.livres.exception.CarrinhoVazioException;
 import br.com.livresbs.livres.exception.LivresException;
 import br.com.livresbs.livres.model.*;
-import br.com.livresbs.livres.repository.CarrinhoRepository;
-import br.com.livresbs.livres.repository.MetodoPagamentoRepository;
-import br.com.livresbs.livres.repository.PedidoRepository;
+import br.com.livresbs.livres.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,30 +16,62 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.nonNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PedidoServiceImplTest {
 
-     @Mock
-     private CarrinhoRepository carrinhoRepository;
+    @Mock
+    private CarrinhoRepository carrinhoRepository;
 
-     @Mock
-     private MetodoPagamentoRepository metodoPagamentoRepository;
+    @Mock
+    private MetodoPagamentoRepository metodoPagamentoRepository;
 
-     @Mock
-     private PedidoRepository pedidoRepository;
+    @Mock
+    private PedidoRepository pedidoRepository;
 
-     @InjectMocks
-     private PedidoServiceImpl pedidoServiceImpl;
+    @Mock
+    private ItemPedidoRepository itemPedidoRepository;
+
+    @Mock
+    private ConsumidorRepository consumidorRepository;
+
+    @Mock
+    private MessageProperty messageProperty;
+
+    @Mock
+    private EnderecoEntregaRepository enderecoEntregaRepository;
+
+    @InjectMocks
+    private PedidoServiceImpl pedidoServiceImpl;
+
+    @Test
+    void checkout__carrinho_vazio() {
+        //Given
+        String cpf = "31522933808";
+        String mensagemException = "teste";
+
+        //When
+        when(carrinhoRepository.findByConsumidorCpf(cpf)).thenReturn(new ArrayList<>());
+        when(messageProperty.getMenssagemCarrinhoVazio()).thenReturn(mensagemException);
+
+        //Then
+        CarrinhoVazioException exception = assertThrows(CarrinhoVazioException.class, () -> {pedidoServiceImpl.checkout(cpf);});
+        assertEquals(mensagemException, exception.getMessage());
+    }
 
      @Test
-     void checkout() {
+     void checkout__com_sucesso() {
          Produto produto1 = new Produto();
          produto1.setNome("Batata");
 
@@ -80,24 +112,62 @@ public class PedidoServiceImplTest {
 
          List<MetodoPagamento> lista2 = new ArrayList<>();
 
-         Mockito.when(carrinhoRepository.findByConsumidorCpf("31522933808")).thenReturn(lista);
-         Mockito.when(metodoPagamentoRepository.findAll()).thenReturn(lista2);
+         when(carrinhoRepository.findByConsumidorCpf("31522933808")).thenReturn(lista);
+         when(metodoPagamentoRepository.findAll()).thenReturn(lista2);
 
          CheckoutDTO checkoutdto = pedidoServiceImpl.checkout("31522933808");
 
-         Assertions.assertTrue(checkoutdto.getValorTotal().equals(new BigDecimal(33.00).setScale(2)));
+         assertTrue(checkoutdto.getValorTotal().equals(new BigDecimal(33.00).setScale(2)));
     }
 
     @Test
-    void avaliarPedido__nao_achado() {
+    void avaliarPedido__pedido_nao_achado() {
         //Given
         Long idPedido = 1L;
         AvaliacaoPedidoDTO avaliacao = new AvaliacaoPedidoDTO();
 
+        //Then
+        LivresException exception = assertThrows(LivresException.class, () -> pedidoServiceImpl.avaliarPedido(idPedido, avaliacao));
+        assertEquals("Pedido não achado", exception.getMessage());
+    }
+
+    @Test
+    void avaliarPedido__item_do_pedido_nao_achado() {
+        //Given
+        Long idPedido = 1L;
+
+        AvaliacaoPedidoDTO avaliacao = new AvaliacaoPedidoDTO();
+        avaliacao.setOperacao(OperacaoAvaliacaoPedido.APROVAR_PEDIDO);
+
+        AlteracaoItemCarrinhoDTO alteracao = new AlteracaoItemCarrinhoDTO();
+        alteracao.setId(idPedido);
+
+        avaliacao.setAlteracoes(Collections.singletonList(alteracao));
+
         //When
+        when(pedidoRepository.findById(idPedido)).thenReturn(Optional.of(new Pedido()));
+        when(itemPedidoRepository.findById(idPedido)).thenReturn(Optional.empty());
 
         //Then
-        Assertions.assertThrows(LivresException.class, () -> pedidoServiceImpl.avaliarPedido(idPedido, avaliacao));
+        LivresException exception = assertThrows(LivresException.class, () -> pedidoServiceImpl.avaliarPedido(idPedido, avaliacao));
+        assertEquals("Item do pedido não achado", exception.getMessage());
+    }
+
+    @Test
+    void avaliarPedido__com_sucesso() {
+        //Given
+        Long idPedido = 1L;
+
+        AvaliacaoPedidoDTO avaliacao = new AvaliacaoPedidoDTO();
+        avaliacao.setOperacao(OperacaoAvaliacaoPedido.APROVAR_PEDIDO);
+
+        //When
+        when(pedidoRepository.findById(idPedido)).thenReturn(Optional.of(new Pedido()));
+
+        //Then
+        pedidoServiceImpl.avaliarPedido(idPedido, avaliacao);
+
+        verify(pedidoRepository, times(1)).save(any());
     }
 
 }

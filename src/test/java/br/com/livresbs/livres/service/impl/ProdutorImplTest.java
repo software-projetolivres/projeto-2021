@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProdutorImplTest {
@@ -30,12 +33,29 @@ class ProdutorImplTest {
         String id = "1";
 
         //When
-        Mockito.when(pr.existsById(id)).thenReturn(false);
+        when(pr.existsById(id)).thenReturn(false);
 
         //Then
         Produtor resposta = produtor.listarUnicoProdutor(id);
 
         Assert.assertNull(resposta);
+    }
+
+    @Test
+    void listarUnicoProdutor__retorna_produto() {
+        //Given
+        String id = "1";
+        Produtor prod = new Produtor();
+        prod.setId(1);
+
+        //When
+        when(pr.existsById(id)).thenReturn(true);
+        when(pr.findById(id)).thenReturn(Optional.of(prod));
+
+        //Then
+        Produtor resposta = produtor.listarUnicoProdutor(id);
+
+        assertEquals(1, resposta.getId());
     }
 
     @Test
@@ -46,14 +66,31 @@ class ProdutorImplTest {
         entrada.setId(1);
 
         //When
-        Mockito.when(pr.existsById(entrada.getProdutor())).thenReturn(false);
+        when(pr.existsById(entrada.getProdutor())).thenReturn(false);
 
         //Then
         ResponseEntity<String> resposta = produtor.cadastraProdutor(entrada);
 
-        Mockito.verify(pr, Mockito.times(1)).save(entrada);
+        verify(pr, times(1)).save(entrada);
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         assertEquals("Produtor cadastrado com sucesso!", resposta.getBody());
+    }
+
+    @Test
+    void cadastraProdutor__produtor_ja_existe() {
+        //Given
+        Produtor entrada = new Produtor();
+        entrada.setProdutor("Produtor");
+        entrada.setId(1);
+
+        //When
+        when(pr.existsById(entrada.getProdutor())).thenReturn(true);
+
+        //Then
+        ResponseEntity<String> resposta = produtor.cadastraProdutor(entrada);
+
+        assertEquals(HttpStatus.CONFLICT, resposta.getStatusCode());
+        assertEquals("Produtor de CNPJ "+ entrada.getProdutor() + " já está cadastrado!", resposta.getBody());
     }
 
     @Test
@@ -64,14 +101,31 @@ class ProdutorImplTest {
         entrada.setProdutor("produtor teste");
 
         //When
-        Mockito.when(pr.existsById(entrada.getProdutor())).thenReturn(true);
+        when(pr.existsById(entrada.getProdutor())).thenReturn(true);
 
         //Then
         ResponseEntity<String> resposta = produtor.atualizaProduto(entrada);
 
-        Mockito.verify(pr, Mockito.times(1)).save(entrada);
+        verify(pr, times(1)).save(entrada);
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         assertEquals("Produtor cadastrado com sucesso!", resposta.getBody());
+    }
+
+    @Test
+    void atualizaProduto__produtor_nao_existe() {
+        //Given
+        Produtor entrada = new Produtor();
+        entrada.setId(1);
+        entrada.setProdutor("produtor teste");
+
+        //When
+        when(pr.existsById(entrada.getProdutor())).thenReturn(false);
+
+        //Then
+        ResponseEntity<String> resposta = produtor.atualizaProduto(entrada);
+
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertEquals("Não Foi possivel atualizar Produtor!", resposta.getBody());
     }
 
     @Test
@@ -80,12 +134,24 @@ class ProdutorImplTest {
         String id = "1";
 
         //When
-        Mockito.when(pr.existsById(id)).thenReturn(true);
+        when(pr.existsById(id)).thenReturn(true);
 
         //Then
         ResponseEntity<String> resposta = produtor.deletarProduto(id);
 
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         assertEquals("Produtor deletado com sucesso!", resposta.getBody());
+    }
+
+    @Test
+    void deletarProduto__produto_nao_existe() {
+        //Given
+        String id = "1";
+
+        //Then
+        ResponseEntity<String> resposta = produtor.deletarProduto(id);
+
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertEquals("Não foi possível deletar produtor", resposta.getBody());
     }
 }
