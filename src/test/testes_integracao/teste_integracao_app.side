@@ -1,8 +1,8 @@
 {
   "id": "7804ed76-c0e0-46f4-8efc-f7c5c97a020b",
   "version": "2.0",
-  "name": "teste integração app",
-  "url": "http://localhost:65458/",
+  "name": "teste_integracao_app",
+  "url": "http://localhost:8082/",
   "tests": [{
     "id": "fdf3d8a9-860d-4c29-9151-221359ad59e1",
     "name": "tela_inicial",
@@ -186,7 +186,7 @@
       "id": "d0e51df3-045d-43b7-a666-6cb74c1e0ace",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:65458/#/",
+      "target": "/",
       "targets": [],
       "value": ""
     }, {
@@ -278,39 +278,715 @@
   }, {
     "id": "eeed2099-bc16-4810-adaa-a36e79758d9a",
     "name": "tela_inicial_pre_comunidade",
-    "commands": []
+    "commands": [{
+      "id": "7a5e5206-095c-4460-99af-297c2a38a640",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f980b596-c36b-4d15-a692-c4b9e7b6b98f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2e24624-1aab-411d-a609-869811c47308",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a47f004f-927e-4174-acf8-8af1842276ea",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "136f43fa-7d9d-4bfb-b7a5-3e6cc03cb2ee",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "267ce632-d221-46c3-bbaa-81242ed4c2a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e68d8ee5-9010-45c1-b26a-60f81cc2a74d",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "84d22192-65a5-4263-bb15-8f44a664bba3",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "c220b81a-6c10-44af-b018-2caea8dbbe48",
     "name": "editar_pre_comunidade",
-    "commands": []
+    "commands": [{
+      "id": "5940a14c-a165-440f-8578-85b6ca05c62a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dee1a216-0a76-46bc-9953-3703566d47f2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1c10bab7-7a89-4b3f-abbe-7872b9d3e713",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74c60580-e0b2-4fbc-bd94-6e810b5157e1",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7072f001-96e7-4d15-a919-9190f4ae1065",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "542cedc6-4c39-4c64-ad80-324ffd819857",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9055bfe6-1717-4738-ab50-948ed9968098",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "bce662ea-d1b4-4e5c-9c8c-f624e255ab08",
     "name": "cadastrar_pre_comunidade",
-    "commands": []
+    "commands": [{
+      "id": "6832d476-6634-4736-b6a7-5067efb267e6",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "63a89a0f-5090-49e3-b57d-d68b5107ac22",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4ceeeabf-673f-477a-8a12-fe4782a67597",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0608366f-ecec-4fdb-8ea6-bfcabb78120e",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7796c879-4057-4736-b60b-285cfa628d87",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4bf28a8c-2f55-4076-910e-8350aebe0b2d",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3fe232ac-4107-4f45-bbae-3b883e4a4431",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e32337c-926f-4714-a2f7-fb882b3e0a8a",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d87b444-ce5d-4b04-990e-9fea52d3e27d",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "ed19e3b1-d151-47fd-9f1e-7f7793e86903",
     "name": "tela_inicial_consumidor",
-    "commands": []
+    "commands": [{
+      "id": "5dc3f6ad-8ee2-45ef-947a-5edd268689e6",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e1ccc636-05a6-470c-8e2e-de9f3fa3f5cd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a30bf2c9-db86-40b9-9e2e-0a0f1f2808d5",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0199d671-4b53-4676-b418-6b1101225499",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9360c697-60b3-414f-88e3-247e91818c22",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "061591fa-f347-497e-a65c-2536f6499a48",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "4cf4cf7a-5513-4322-af6a-dc019137a8d3",
     "name": "cadastra_consumidor",
-    "commands": []
+    "commands": [{
+      "id": "4466d7d0-b386-46c7-809b-e86e7ff701f1",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f00aa9b1-33c0-4239-beaa-8cc5529e40eb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "322ed65f-6b27-4e02-a38d-0b564b4bc3c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2afe2bdb-7afa-4dc6-b2b8-6d90e3e834c9",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ece35d31-ffbe-4660-8946-7b2acde21ee0",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b415720-0ffd-4a2f-a762-593903176c24",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17e222d4-cc6f-49ce-ade5-195867c1d89f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c003e5c3-85f0-46bc-ba69-fb660ae742f0",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4186e198-0bb9-4c75-8b40-83b5f53d06fa",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e53c59a3-cc68-40c6-85d4-7b5370c6e599",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d9b92ae-30bf-4b0b-8a42-671527a5c8e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f14318d-640b-4eb3-b3d1-81e9679cfb1e",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "e6296d72-49b2-4c25-aed4-99445eff36c2",
     "name": "exclui_consumidor",
-    "commands": []
+    "commands": [{
+      "id": "1a191eb9-60b9-43e8-8d1b-93e491a56850",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4846a21e-eb03-48ea-98b8-f7305cce08c3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3a7c33a3-2cd8-42da-9d9d-761718898c5d",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8fe9ebad-edcf-4909-acc6-dc2580b4c8c5",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2008cec2-76b9-4e6d-934f-6029761144fb",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "145fd57f-c369-4c8e-88c9-522dfe2878f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "634584b9-6bd9-4174-94ce-64690c875f85",
     "name": "altera_consumidor",
-    "commands": []
+    "commands": [{
+      "id": "e45fd895-ae25-4cd5-9bac-2e32ff8ea102",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ec63504-1e6f-41b2-a929-4b08bd030e2b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7c83246-2508-47ac-919e-013fcd344f03",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "01c51ae3-b176-498b-9d5f-0fc105e76809",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09827d51-0383-4686-8f05-9f65e2c5afb0",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5787ee3-9e31-42d1-bd12-379f04d5f9f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "98a3f3ce-9e5b-4f3c-af04-9370c04b4e48",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "16ac1ea0-330e-43e3-b6bc-dd4e1a2084a1",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bcc0cc52-9e8a-4080-9413-db54ecadfb32",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca136202-ea65-497a-bbd5-41274ac1ac63",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5e224e1-2351-45f0-abf9-2aebc1ad078c",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5e1b355-c26d-47f0-8a63-0b5f5b2f311b",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6eb5c63-351a-4da7-88c9-411c35e54e0b",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "620b3767-acd7-43a1-ad11-e79b2dd03089",
     "name": "tela_produto",
-    "commands": []
+    "commands": [{
+      "id": "02bd2659-56b9-45be-8bdc-a93021d1fd3d",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7cecf35-73c4-4571-8d48-b340f39dbdc5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0d1859e0-7ace-4579-b9d6-cfbedb8a5b2f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d1f03c0-e710-4f6b-bf55-17e1083b358c",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "679647f1-35cf-4a81-86c1-e142c8fd03c6",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d0643f8-79ef-4bc4-8be0-a0694b955dd3",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
     "id": "269331a7-f8eb-4c94-9b42-30ed01aa2093",
     "name": "exclui_pre_comunidade",
-    "commands": []
+    "commands": [{
+      "id": "f535eb5d-ecf1-4022-9e11-16b323cb9231",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "03314b95-81ee-4f12-8ee8-46a795f75e9d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ed16d4b8-194c-4f39-a457-25cff28bbf88",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9485ffde-f3eb-4d33-9a0f-9d534194c525",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e97aad6c-be70-41e3-8fb8-ec6317469a41",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "301c17f7-a839-426e-9d2d-03bbae38872f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "64dfae45-3d40-4b92-b57f-1d60e058a65d",
@@ -348,6 +1024,6 @@
     "timeout": 300,
     "tests": ["620b3767-acd7-43a1-ad11-e79b2dd03089"]
   }],
-  "urls": ["http://localhost:61311/", "http://localhost:54414/", "http://localhost:65458/"],
+  "urls": ["http://localhost:61311/", "http://localhost:54414/", "http://localhost:65458/", "http://localhost:49376/", "http://localhost:8082/"],
   "plugins": []
 }
