@@ -1,0 +1,353 @@
+{
+  "id": "7804ed76-c0e0-46f4-8efc-f7c5c97a020b",
+  "version": "2.0",
+  "name": "teste integração app",
+  "url": "http://localhost:65458/",
+  "tests": [{
+    "id": "fdf3d8a9-860d-4c29-9151-221359ad59e1",
+    "name": "tela_inicial",
+    "commands": [{
+      "id": "03c45e31-7cc2-45fc-bb24-d9f59675d9c4",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ca7bfea0-cbfa-4b5f-bac6-1ac3201667e9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e67a02e4-789d-4c28-8360-aada6bc598f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "96550e7f-84ce-40b0-9aba-ad51ca87d908",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "Bem-Vindo ao Livres"
+    }, {
+      "id": "f249ace6-b789-4824-b436-2c1e004f250c",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "90fadded-4b4e-42a0-a418-26c279beaef7",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a2b54d22-6d43-4a87-bd09-b68127572abd",
+    "name": "tela_cadastro",
+    "commands": [{
+      "id": "59a00bff-95d0-49fd-8ba5-29e8d62dc08c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b2389ce3-5894-4e86-835e-171c41e41699",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "da310fa1-5fa0-433d-b216-149f0d8d937f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f15631f-f179-48a6-af6e-b8c5ba70c58e",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30623332-31d4-47bc-a44c-894fe463fd6a",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2226eeeb-9e34-4b47-9c11-57ae178052af",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "216143b6-5ecd-4eb6-8369-f4a5d5e8e5a6",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7561115-878c-4fa9-8fea-bb18651adc1f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cbbac646-6732-4dd3-80ed-4990d9998221",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a43a278-5d1b-49fc-aa21-df70091cae6d",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc14b9d6-977f-4be3-96a6-683617b72f2a",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "edb26b3f-abf0-4235-a690-1ba65f4f2f1f",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2dd283a5-87c4-4b16-8564-f21bcc51bed9",
+    "name": "acessar_conta",
+    "commands": [{
+      "id": "d0e51df3-045d-43b7-a666-6cb74c1e0ace",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:65458/#/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b42c2296-3478-4617-93ef-bf4bec78affa",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "54448924332"
+    }, {
+      "id": "50297c8a-de0d-4936-8606-9f95a0c31672",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "Teste123"
+    }, {
+      "id": "e4ffba47-26bb-45f7-b44e-267c4cee1ed0",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "59b8b2fb-c537-4610-9881-16978cd35327",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "29cb91d3-e2a3-4226-b82a-d49218c20254",
+    "name": "home",
+    "commands": [{
+      "id": "4f85abd3-926d-4427-9655-1c7ddd28a33e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f660aae6-474f-4a6c-bb1f-251dbd5a00c4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1020",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1ed27c8e-7d07-4508-afe9-fe5791e0b2e8",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "Acessar"
+    }, {
+      "id": "bcf311ae-26bb-4571-8cde-ce1b6ae55695",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "Seja Bem-Vindo Usuário!"
+    }, {
+      "id": "1d0cada0-8a9e-4632-9d3e-1054778beb83",
+      "comment": "",
+      "command": "click",
+      "target": "css=flt-glass-pane",
+      "targets": [
+        ["css=flt-glass-pane", "css:finder"],
+        ["xpath=//flt-glass-pane", "xpath:position"]
+      ],
+      "value": "Home"
+    }]
+  }, {
+    "id": "eeed2099-bc16-4810-adaa-a36e79758d9a",
+    "name": "tela_inicial_pre_comunidade",
+    "commands": []
+  }, {
+    "id": "c220b81a-6c10-44af-b018-2caea8dbbe48",
+    "name": "editar_pre_comunidade",
+    "commands": []
+  }, {
+    "id": "bce662ea-d1b4-4e5c-9c8c-f624e255ab08",
+    "name": "cadastrar_pre_comunidade",
+    "commands": []
+  }, {
+    "id": "ed19e3b1-d151-47fd-9f1e-7f7793e86903",
+    "name": "tela_inicial_consumidor",
+    "commands": []
+  }, {
+    "id": "4cf4cf7a-5513-4322-af6a-dc019137a8d3",
+    "name": "cadastra_consumidor",
+    "commands": []
+  }, {
+    "id": "e6296d72-49b2-4c25-aed4-99445eff36c2",
+    "name": "exclui_consumidor",
+    "commands": []
+  }, {
+    "id": "634584b9-6bd9-4174-94ce-64690c875f85",
+    "name": "altera_consumidor",
+    "commands": []
+  }, {
+    "id": "620b3767-acd7-43a1-ad11-e79b2dd03089",
+    "name": "tela_produto",
+    "commands": []
+  }, {
+    "id": "269331a7-f8eb-4c94-9b42-30ed01aa2093",
+    "name": "exclui_pre_comunidade",
+    "commands": []
+  }],
+  "suites": [{
+    "id": "64dfae45-3d40-4b92-b57f-1d60e058a65d",
+    "name": "inicio",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["fdf3d8a9-860d-4c29-9151-221359ad59e1", "a2b54d22-6d43-4a87-bd09-b68127572abd", "2dd283a5-87c4-4b16-8564-f21bcc51bed9"]
+  }, {
+    "id": "f9c71bd3-4a95-4f08-81c1-de6a93a80a62",
+    "name": "Consumidor",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["634584b9-6bd9-4174-94ce-64690c875f85", "4cf4cf7a-5513-4322-af6a-dc019137a8d3", "e6296d72-49b2-4c25-aed4-99445eff36c2", "ed19e3b1-d151-47fd-9f1e-7f7793e86903"]
+  }, {
+    "id": "68359908-8a8d-4453-b94c-eac692ac19d7",
+    "name": "Home",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["29cb91d3-e2a3-4226-b82a-d49218c20254"]
+  }, {
+    "id": "e8060428-7605-4d9e-bfb9-4d3a794049b2",
+    "name": "Pre Comunidade",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["bce662ea-d1b4-4e5c-9c8c-f624e255ab08", "c220b81a-6c10-44af-b018-2caea8dbbe48", "269331a7-f8eb-4c94-9b42-30ed01aa2093", "eeed2099-bc16-4810-adaa-a36e79758d9a"]
+  }, {
+    "id": "76de869e-a3d5-4d3b-9733-5ad3969a16b6",
+    "name": "Produtos",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["620b3767-acd7-43a1-ad11-e79b2dd03089"]
+  }],
+  "urls": ["http://localhost:61311/", "http://localhost:54414/", "http://localhost:65458/"],
+  "plugins": []
+}
