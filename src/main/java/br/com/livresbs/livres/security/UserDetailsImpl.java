@@ -16,7 +16,6 @@ public class UserDetailsImpl implements UserDetails{
     private String login;
     private String senha;
     private String nome;
-    private String cpf;
     private Collection<? extends GrantedAuthority> authorities;
 
 
@@ -24,13 +23,12 @@ public class UserDetailsImpl implements UserDetails{
 
     }
 
-    public UserDetailsImpl(String id, String login, String senha, Set<TipoPerfil> perfis, String nome, String cpf){
+    public UserDetailsImpl(String id, String login, String senha, Set<TipoPerfil> perfis, String nome){
         super();
         this.id = id;
         this.login = login;
         this.senha = senha;
         this.nome = nome;
-        this.cpf = cpf;
         this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao()))
 				.collect(Collectors.toList());
     }
@@ -60,10 +58,6 @@ public class UserDetailsImpl implements UserDetails{
 
     public String getNome() {
         return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
     }
 
     @Override
