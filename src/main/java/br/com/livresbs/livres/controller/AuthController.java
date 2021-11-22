@@ -24,7 +24,7 @@ public class AuthController {
         UserDetailsImpl user = UsuarioService.authenticated();
 
         if(user != null) {
-            String token = jwtUtil.generateToken(user.getUsername());
+            String token = jwtUtil.generateToken(user.getUsername(), user.getNome());
             response.addHeader("Authorization", "Bearer" + token);
             return ResponseEntity.ok().build();
         }

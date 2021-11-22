@@ -15,6 +15,7 @@ public class UserDetailsImpl implements UserDetails{
     private String id;
     private String login;
     private String senha;
+    private String nome;
     private Collection<? extends GrantedAuthority> authorities;
 
 
@@ -22,11 +23,12 @@ public class UserDetailsImpl implements UserDetails{
 
     }
 
-    public UserDetailsImpl(String id, String login, String senha, Set<TipoPerfil> perfis){
+    public UserDetailsImpl(String id, String login, String senha, Set<TipoPerfil> perfis, String nome){
         super();
         this.id = id;
         this.login = login;
         this.senha = senha;
+        this.nome = nome;
         this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao()))
 				.collect(Collectors.toList());
     }
@@ -52,6 +54,10 @@ public class UserDetailsImpl implements UserDetails{
     @Override
     public String getUsername() {
         return login;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     @Override
