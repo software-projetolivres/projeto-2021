@@ -24,9 +24,10 @@ public class JWTUtil implements Serializable{
     public String generateToken(String login, String nome) {
         return Jwts.builder()
                 .setSubject(login)
-                .setSubject(nome)
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+                .claim("user-name", nome)
+                .claim("user-login", login)
                 .compact();
     }
 
